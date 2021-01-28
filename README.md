@@ -17,6 +17,10 @@ Connections to the Arduino boards are in the programme_headers and:
     MOSI  ...... D11    ....  MOSI
     RST   ...... D9     ....  D3
 
+## Setup
+
+![Setup](image/LoRa_P2P.png)
+
 ## Libraries
 
 Please install (prior compilation) the followwing Libraries.  
