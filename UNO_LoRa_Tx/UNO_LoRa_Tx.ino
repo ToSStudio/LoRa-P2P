@@ -38,6 +38,6 @@ void loop()
   LoRa.beginPacket();
   LoRa.print(counter);
   LoRa.endPacket();
-  counter ++;
-  delay (2000);
+  counter++;
+  delay(2000);
 }

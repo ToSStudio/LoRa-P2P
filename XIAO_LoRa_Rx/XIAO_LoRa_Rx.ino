@@ -26,7 +26,7 @@ void setup(void)
   u8x8.drawString(4, 0, "LoRa-Rx");
   LoRa.setPins(1, 3, 2);
   if (!LoRa.begin(433700000)) {     // 433.775 kHz
-    u8x8.drawString(2, 5, "LoRa Modul Fail !");
+    u8x8.drawString(2, 5, "LoRa Module Fail !");
     while (1);
   }
   LoRa.setSpreadingFactor(12);
