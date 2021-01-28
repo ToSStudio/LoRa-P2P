@@ -19,6 +19,9 @@ Connections to the Arduino boards are in the programme_headers and:
 
 ## Libraries
 
-Please install in Library Manager (Sketch->Include Library->Library Manager or "`<shift> <cntl> i`" ) the Library "LoRa" by Sundeep Mistry in version 0.8.0 or higher prior compilation.
+Please install prior compilation the followwing Libraries using the Library Manager (Sketch->Include Library->Library Manager or "`<shift> <cntl> i`" ):
 
-For the Receiver pls install u8x8
+Library | Used In | Installation Source and Version
+--------|---------|--------
+"LoRa" | Rx, Tx | autherewd "Sundeep Mistry"; version 0.8.0 or higher 
+"U8g2" | Rx     | autherewd "oliver"; version 2.28.10 or higher)
