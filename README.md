@@ -19,9 +19,10 @@ Connections to the Arduino boards are in the programme_headers and:
 
 ## Libraries
 
-Please install prior compilation the followwing Libraries using the Library Manager (Sketch->Include Library->Library Manager or "`<shift> <cntl> i`" ):
+Please install (prior compilation) the followwing Libraries.  
+Use the Arduino Library Manager (Sketch->Include Library->Library Manager or "`<shift> <cntl> i`" ):
 
 Library | Used In | Installation Source and Version
 --------|---------|--------
-"LoRa" | Rx, Tx | autherewd "Sundeep Mistry"; version 0.8.0 or higher 
-"U8g2" | Rx     | autherewd "oliver"; version 2.28.10 or higher)
+"LoRa" | Rx, Tx | written by "Sundeep Mistry"; version 0.8.0 or higher 
+"U8g2" | Rx     | written by "oliver"; version 2.28.10 or higher)
