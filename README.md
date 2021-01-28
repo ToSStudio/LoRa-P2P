@@ -6,9 +6,9 @@ Full power is rarely necessary due to the great link-budget LoRa does offer.
 One SX1278 is connected to a SEEEDUINO XIAO which come natively with 3.3 V. Connections to the Arduino boards are in the programme_headers and:
 
 /*----------------
-LoRa         UNO         XIAO
-3,3 V ...... 3,3 V  ....  3,3 V
-Gnd   ...... Gnd    ....  Gnd
+   LoRa         UNO         XIAO
+   3,3 V ...... 3,3 V  ....  3,3 V
+   Gnd   ...... Gnd    ....  Gnd
    NSS   ...... D10    ....  D1
    DIO0  ...... D2     ....  D2
    SCK   ...... D13    ....  SCK
