@@ -6,8 +6,15 @@
 	],
 	"settings": {
 		"cSpell.words": [
+			"EPDIR",
+			"EPTYPE",
+			"MOSI",
+			"RFTRANSMITTER",
+			"RSSI",
+			"Rohner",
 			"SEEEDUINO",
-			"XIAO"
+			"XIAO",
+			"println"
 		]
 	}
 }

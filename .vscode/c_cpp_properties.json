@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        },
+        {
+            "name": "ArduinoUno",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${ProgramFiles(x86)}/Arduino/hardware/tools/avr/avr/include",
+                "${ProgramFiles(x86)}/Arduino/hardware/arduino/avr/variants/standard",
+                "${ProgramFiles(x86)}/Arduino/hardware/arduino/avr/cores/arduino",
+                "C:\\Users\\${USERNAME}/Documents/Arduino/libraries/RFTransmitter-master",
+                "C:\\Users\\${USERNAME}/Documents/Arduino/libraries/RFReceiver-master",
+                "C:\\Users\\${USERNAME}/Documents/Arduino/libraries/PinChangeInterruptHandler-master"
+            ],
+            "defines": [
+                "ARDUINO=100"
+            ],
+            "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\bin\\avr-g++",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
