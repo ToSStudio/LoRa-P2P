@@ -29,4 +29,4 @@ Use the Arduino Library Manager (Sketch->Include Library->Library Manager or "`<
 Library | Used In | Installation Source and Version
 --------|---------|--------
 "LoRa" | Rx, Tx | written by "Sundeep Mistry"; version 0.8.0 or higher 
-"U8g2" | Rx     | written by "oliver"; version 2.28.10 or higher)
+"U8g2" | Rx     | written by "oliver"; version 2.28.10 or higher
