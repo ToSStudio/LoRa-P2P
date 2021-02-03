@@ -14,5 +14,5 @@ It does
 * remain solid while charging
 * stay off when fully charged
 
-Wihtout a battery the orange LED will flicker permenently. To get rid of that: attach a battery, desolder the LED or put the module behind a masking face.
+Wihtout a battery the orange LED will flicker permanently. To get rid of that: attach a battery, desolder the LED or put the module behind a masking face.
 
