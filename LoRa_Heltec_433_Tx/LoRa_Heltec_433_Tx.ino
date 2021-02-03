@@ -6,17 +6,17 @@
 
 // H A R D W A R E
 
-  /*--------------------------\
-  | SX1276 (pin) – ESP32 (pin)|
-  | SCK - GPIO5               |
-  | MISO - GPIO19             |
-  | MOSI - GPIO27             |
-  | CS - GPIO18 (Slave Select)|
-  | RESET - GPIO14            |
-  | DIO0 (8) – GPIO26 (15)    |
-  | DIO1 (9) – GPIO33 (13)    |
-  | DIO2 (10) – GPIO32 (12)   |
-  \------------------------- */
+/*--------------------------\
+| SX1276 (pin) – ESP32 (pin)|
+| SCK - GPIO5               |
+| MISO - GPIO19             |
+| MOSI - GPIO27             |
+| CS - GPIO18 (Slave Select)|
+| RESET - GPIO14            |
+| DIO0 (8) – GPIO26 (15)    |
+| DIO1 (9) – GPIO33 (13)    |
+| DIO2 (10) – GPIO32 (12)   |
+\------------------------- */
 
 const byte lora_PIN_SCK = 5;
 const byte lora_PIN_MISO = 19;
@@ -27,20 +27,21 @@ const byte lora_PIN_DIO0 = 15;
 const byte lora_PIN_DIO1 = 13;
 const byte lora_PIN_DIO2 = 12;
 
-  /*-----------------------------\
-  | onboard-LED (white): PIN25   |
-  \---------------------------- */
+/*-----------------------------\
+| onboard-LED (white): PIN25   |
+\---------------------------- */
 
 const byte pinLED = 25;
 
 // Lora-Register names:
-
 const byte lora_RegFifo = 0x00;
 const byte lora_RegOpMode = 0x01;
 const byte lora_RegFreqMsb = 0x06;
 const byte lora_RegFreqMid = 0x07;
 const byte lora_RegFreqLsb = 0x08;
 const byte lora_RegPaConfig = 0x09;
+const byte lora_RegOcp = 0x0b;
+const byte lora_RegLna = 0x0c;
 const byte lora_RegModemStat = 0x18;
 const byte lora_RegPktSnr = 0x19;              // SNR of last received Packet
 const byte lora_RegPktRssi = 0x1a;             // RSSI of last received Packet
@@ -109,6 +110,8 @@ void lora_Config()
   lora_Write(lora_RegModemConfig1, 104); // BW 62,5 khz |  Coding rate: 4/8  | Explicit mode
   lora_Write(lora_RegModemConfig2, 192); // SF = 12 (4096 Chips / Symbol)
   lora_Write(lora_RegPaConfig, 2);       // set Tx-Power to minimum
+  lora_Write(lora_RegOcp, 26);           // Over Current Protection on 
+  lora_Write(lora_RegLna, 192);          // LNA minimum gain
 }
 
 void lora_tx(byte tx_Data)
@@ -117,13 +120,16 @@ void lora_tx(byte tx_Data)
   lora_Write(lora_RegFifoTxBaseAddr, 0x80);
   lora_Write(lora_RegFifoAddrPtr, 0x80);
   lora_Write(lora_RegFifo, 68);
-  lora_Write(lora_RegFifo, 58);
-  lora_Write(lora_RegFifo, 32);
+  // lora_Write(lora_RegFifo, 58);
+  // lora_Write(lora_RegFifo, 32);
   lora_Write(lora_RegFifo, tx_Data);
-  lora_Write(lora_RegPayloadLength, 4);
+  // lora_Write(lora_RegFifo, 32);
+  lora_Write(lora_RegFifo, 32);
+  lora_Write(lora_RegFifo, (tx_Data-1));
+  // lora_Write(lora_RegPayloadLength, 4);
   delay(5);
   lora_Write(lora_RegOpMode, 0x83);                // Tx-Mode
-   // muss dann nicht in den vorigen Mode zurück ?
+  // lora_Write(lora_RegOpMode, 8);                   // sleep mode !! does not work !!
 }
 
 // ======= end Functions =======
