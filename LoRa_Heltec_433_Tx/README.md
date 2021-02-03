@@ -16,4 +16,6 @@ It does
 
 Wihtout a battery connected the orange LED will flicker permanently. To get rid of that: attach a battery, desolder the LED or put the module behind a masking face.
 
+- - - -
+
 - [ ] softwire PA_Output
