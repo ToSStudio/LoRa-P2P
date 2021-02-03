@@ -7,7 +7,7 @@ The OLED is accessed through the external U8x8 Library.\
 I am using V1.0 here. If possible, get a V2.1 Module. It comes with slight improvements; is pin-compatible though.
 
 ## Onboard LED ##
-There is one white LED onboard which can be accessed through PIN25. A second LED (orange) is attached to the LiIon / LiPO charging unit and cannot be controlled by the µController.\ 
+There is one white LED onboard which can be accessed through PIN25. A second LED (orange) is attached to the LiIon / LiPO charging unit and cannot be controlled by the µController. 
 
 It does
 * blink when powered
