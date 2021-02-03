@@ -1,6 +1,6 @@
 // MX_rx.ino
 
-// need to be set, if Seriale is used with the intention to work with PC-USB
+// need to be set, if Serial Port is used with the intention to work with PC-USB
 #define USBCON 
 
 #include <PinChangeInterruptHandler.h>
