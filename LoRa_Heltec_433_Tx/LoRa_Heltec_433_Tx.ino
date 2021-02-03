@@ -6,7 +6,7 @@
 
 // H A R D W A R E
 
-/*--------------------------\
+  /*--------------------------\
   | SX1276 (pin) – ESP32 (pin)|
   | SCK - GPIO5               |
   | MISO - GPIO19             |
@@ -27,7 +27,7 @@ const byte lora_PIN_DIO0 = 15;
 const byte lora_PIN_DIO1 = 13;
 const byte lora_PIN_DIO2 = 12;
 
-/*-----------------------------\
+  /*-----------------------------\
   | onboard-LED (white): PIN25   |
   \---------------------------- */
 
