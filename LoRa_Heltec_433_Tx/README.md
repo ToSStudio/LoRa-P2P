@@ -11,8 +11,8 @@ There is one white LED onboard which can be accessed through PIN25. A second LED
 
 It does
 * blink when powered
-* remain solid while charging
+* remain on solid while charging
 * stay off when fully charged
 
-Wihtout a battery the orange LED will flicker permanently. To get rid of that: attach a battery, desolder the LED or put the module behind a masking face.
+Wihtout a battery connected the orange LED will flicker permanently. To get rid of that: attach a battery, desolder the LED or put the module behind a masking face.
 
