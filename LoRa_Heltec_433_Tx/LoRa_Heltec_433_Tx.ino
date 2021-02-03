@@ -6,7 +6,7 @@
 
 // H A R D W A R E
 
-  /*--------------------------\
+/*--------------------------\
   | SX1276 (pin) – ESP32 (pin)|
   | SCK - GPIO5               |
   | MISO - GPIO19             |
@@ -27,7 +27,7 @@ const byte lora_PIN_DIO0 = 15;
 const byte lora_PIN_DIO1 = 13;
 const byte lora_PIN_DIO2 = 12;
 
-  /*-----------------------------\
+/*-----------------------------\
   | onboard-LED (white): PIN25   |
   \---------------------------- */
 
@@ -40,12 +40,14 @@ const byte lora_RegOpMode = 0x01;
 const byte lora_RegFreqMsb = 0x06;
 const byte lora_RegFreqMid = 0x07;
 const byte lora_RegFreqLsb = 0x08;
+const byte lora_RegPaConfig = 0x09;
 const byte lora_RegModemStat = 0x18;
 const byte lora_RegPktSnr = 0x19;              // SNR of last received Packet
 const byte lora_RegPktRssi = 0x1a;             // RSSI of last received Packet
 const byte lora_RegRssi = 0x1b;                // actual RSSI
-const byte lory_RegModemConfig1 = 0x1D;        // default: ExplicitHeaderMode | CodingRate=4/5 | Signal Bandwidth=125kHz
+const byte lora_RegModemConfig1 = 0x1D;        // default: ExplicitHeaderMode | CodingRate=4/5 | Signal Bandwidth=125kHz
 const byte lora_RegModemConfig2 = 0x1E;        // default: Spreading Factor=128chips/symbol | TxContinuous=off | RXPayLoadCRC=disable
+const byte lora_RegModemConfig3 = 0x26;        // LowDataRateOptimize, AgcAutoOn
 const byte lora_RegPayloadLength = 0x22;       // [I guess this is for Tx and req'ed only in Implicit Header Mode]
 const byte lora_RegFifoRxByteAddr = 0x25;      // address of last byte written by LoRa-Receiver
 const byte lora_RegFifoAddrPtr = 0x0D;         // default: 0x00
@@ -104,18 +106,24 @@ void lora_Setup()                                // set OpMode LORA, continuous 
 
 void lora_Config()
 {
-  lora_Write(loraRagModemConfig1, 104); // BW 62,5 khz |  Coding rate: 4/8  | Explicit mode
+  lora_Write(lora_RegModemConfig1, 104); // BW 62,5 khz |  Coding rate: 4/8  | Explicit mode
+  lora_Write(lora_RegModemConfig2, 192); // SF = 12 (4096 Chips / Symbol)
+  lora_Write(lora_RegPaConfig, 2);       // set Tx-Power to minimum
 }
 
-void lora_tx()
+void lora_tx(byte tx_Data)
 {
   lora_Write(lora_RegOpMode, 0x81);               // Bit 7 | Bit 1 = LoRaMode | STDBY req'd mode to fill FIFO
   lora_Write(lora_RegFifoTxBaseAddr, 0x80);
   lora_Write(lora_RegFifoAddrPtr, 0x80);
-  lora_Write(lora_RegFifo, 65);
-  lora_Write(lora_RegPayloadLength, 1);
-  delay(20);
+  lora_Write(lora_RegFifo, 68);
+  lora_Write(lora_RegFifo, 58);
+  lora_Write(lora_RegFifo, 32);
+  lora_Write(lora_RegFifo, tx_Data);
+  lora_Write(lora_RegPayloadLength, 4);
+  delay(5);
   lora_Write(lora_RegOpMode, 0x83);                // Tx-Mode
+   // muss dann nicht in den vorigen Mode zurück ?
 }
 
 // ======= end Functions =======
@@ -135,6 +143,7 @@ void setup(void)
   digitalWrite(lora_PIN_SS, HIGH);           // unselect SPI device
   lora_Reset();
   lora_Setup();
+  lora_Config();                             // set SF, BW,
   lora_SetFreq();
 }
 
@@ -144,9 +153,11 @@ void loop(void)
   u8x8.print((((lora_Read(lora_RegFreqMsb) * 65536) + (lora_Read(lora_RegFreqMid) * 256) + lora_Read(lora_RegFreqLsb)) * 61.03515625) / 1000, 0);
   u8x8.print(" kHz");
   delay(500);
-  lora_tx();
-  digitalWrite (pinLED, HIGH);
-  delay(270);
-  digitalWrite (pinLED, LOW);
-  delay (2500);
+  for (byte tx_byte = 65; tx_byte < 91; tx_byte++) {
+    lora_tx(tx_byte);
+    digitalWrite (pinLED, HIGH);
+    delay(270);
+    digitalWrite (pinLED, LOW);
+    delay (2500);
+  }
 }
