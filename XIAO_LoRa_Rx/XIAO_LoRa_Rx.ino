@@ -8,13 +8,13 @@ U8X8_SSD1306_128X64_NONAME_HW_I2C u8x8(/* reset=*/ U8X8_PIN_NONE);
 /*----------------
    LoRa         UNO         XIAO
    3,3 V ...... 3,3 V  ....  3,3 V
-   Gnd   ...... Gnd
-   NSS   ...... D10
-   DIO0  ...... D2
-   SCK   ...... D13
-   MISO  ...... D12
-   MOSI  ...... D11
-   RST   ...... D9
+   Gnd   ...... Gnd    ....  Gnd
+   NSS   ...... D10    ....  D1
+   DIO0  ...... D2     ....  D2
+   SCK   ...... D13    ....  SCK
+   MISO  ...... D12    ....  MISO
+   MOSI  ...... D11    ....  MOSI
+   RST   ...... D9     ....  D3
 */
 
 void setup(void)
