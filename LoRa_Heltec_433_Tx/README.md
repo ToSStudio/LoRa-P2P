@@ -19,4 +19,4 @@ Wihtout a battery connected the orange LED will flicker permanently. To get rid 
 - - - -
 
 - [ ] softwire PA_Output
-- [ ] write Heltec-Rx
+- [ ] write Heltec-Rx w/o relying on external lib
