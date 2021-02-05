@@ -119,14 +119,14 @@ void lora_tx(byte tx_Data)
   lora_Write(lora_RegOpMode, 0x81);               // Bit 7 | Bit 1 = LoRaMode | STDBY req'd mode to fill FIFO
   lora_Write(lora_RegFifoTxBaseAddr, 0x80);
   lora_Write(lora_RegFifoAddrPtr, 0x80);
-  lora_Write(lora_RegFifo, 68);
+  // lora_Write(lora_RegFifo, 68);
   // lora_Write(lora_RegFifo, 58);
   // lora_Write(lora_RegFifo, 32);
   lora_Write(lora_RegFifo, tx_Data);
   // lora_Write(lora_RegFifo, 32);
   lora_Write(lora_RegFifo, 32);
   lora_Write(lora_RegFifo, (tx_Data-1));
-  // lora_Write(lora_RegPayloadLength, 4);
+  lora_Write(lora_RegPayloadLength, 3);            // not always req'd -- but better to have 
   delay(5);
   lora_Write(lora_RegOpMode, 0x83);                // Tx-Mode
   // lora_Write(lora_RegOpMode, 8);                   // sleep mode !! does not work !!
@@ -144,8 +144,9 @@ void setup(void)
   u8x8.begin();                              // start the OLED-Driver
   u8x8.setPowerSave(false);                  // wake up the OLED
   u8x8.setFont(u8x8_font_chroma48medium8_r); // use u8x8 Font for OLED
-  u8x8.drawString(0, 0, "LORA-Experiment");  // write header to OLED once
+  u8x8.drawString(4, 0, "LORA-Tx");  // write header to OLED once
   u8x8.drawString(0, 2, "QRG:");             // write header to OLED once
+  u8x8.drawString(0, 4, "Wert:");       
   digitalWrite(lora_PIN_SS, HIGH);           // unselect SPI device
   lora_Reset();
   lora_Setup();
@@ -156,13 +157,15 @@ void setup(void)
 void loop(void)
 {
   u8x8.setCursor(4, 2);
-  u8x8.print((((lora_Read(lora_RegFreqMsb) * 65536) + (lora_Read(lora_RegFreqMid) * 256) + lora_Read(lora_RegFreqLsb)) * 61.03515625) / 1000, 0);
+  u8x8.print((((lora_Read(lora_RegFreqMsb) * 65536) + (lora_Read(lora_RegFreqMid) * 256) + lora_Read(lora_RegFreqLsb)) * 61.03515625) / 1000000, 3);
   u8x8.print(" kHz");
   delay(500);
   for (byte tx_byte = 65; tx_byte < 91; tx_byte++) {
     lora_tx(tx_byte);
     digitalWrite (pinLED, HIGH);
     delay(270);
+    u8x8.setCursor(6, 4);
+    u8x8.print (tx_byte);
     digitalWrite (pinLED, LOW);
     delay (2500);
   }
